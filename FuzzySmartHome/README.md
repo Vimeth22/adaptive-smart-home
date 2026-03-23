@@ -1,6 +1,6 @@
-# Adaptive Smart Environment Controller (AEMS)
+# Adaptive Smart Environment Controller 
 
-## 📌 Research Abstract
+## Research Abstract
 
 This project implements an **Autonomous Energy Management System (AEMS)** designed to optimize HVAC power consumption using **Mamdani Fuzzy Inference Systems (FIS)**. Traditional threshold-based thermostats operate on a binary ON/OFF logic, leading to energy inefficiency (short-cycling) and thermal discomfort (hysteresis). 
 
@@ -13,7 +13,7 @@ By fuzzifying these crisp inputs into linguistic variables (e.g., *Comfortable*,
 
 ---
 
-## 🚀 Key Features (v2.1)
+## Key Features 
 
 *   **Logic Engine**: A robust `FuzzyACEngine` class utilizing **Centroid Defuzzification** for smooth output control.
 *   **Explainable AI (XAI)**:
@@ -24,7 +24,7 @@ By fuzzifying these crisp inputs into linguistic variables (e.g., *Comfortable*,
 
 ---
 
-## 🛠️ Installation
+## Installation
 
 Prerequisites: Python 3.9+
 
@@ -37,7 +37,7 @@ Prerequisites: Python 3.9+
 2.  **Create Virtual Environment**
     ```bash
     python -m venv venv
-    source venv/bin/activate  # On Windows: venv\Scripts\activate
+    source venv/bin/activate  
     ```
 
 3.  **Install Dependencies**
@@ -47,7 +47,7 @@ Prerequisites: Python 3.9+
 
 ---
 
-## 💻 Usage
+## Usage
 
 ### 1. Web Dashboard (Interactive Demo)
 Launch the professional dashboard to interact with the logic engine in real-time.
@@ -66,7 +66,7 @@ python FuzzySmartHome/simulator.py
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 adaptive-smart-home/
@@ -81,7 +81,7 @@ adaptive-smart-home/
 
 ---
 
-## 🔬 Methodology
+## Methodology
 
 The system operates on a **Mamdani Inference** pipeline:
 
@@ -97,6 +97,6 @@ The system operates on a **Mamdani Inference** pipeline:
 
 ---
 
-## 📜 License
+## License
 This project is open-source and available under the [MIT License](LICENSE).
 
