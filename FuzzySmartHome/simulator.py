@@ -14,13 +14,8 @@ logging.basicConfig(
 logger = logging.getLogger("SmartHomeSimulator")
 
 class SmartHomeSimulator:
-    """
-    Handles the execution of test scenarios and visualization of results
-    for the Fuzzy AC Control System.
-    """
 
     def __init__(self):
-        """Initialize the simulator and load the fuzzy engine."""
         logger.info("Initializing Smart Home Simulator...")
         try:
             self.simulation, self.variables = create_fuzzy_system()
@@ -91,7 +86,6 @@ class SmartHomeSimulator:
             plt.grid(True, linestyle='--', alpha=0.6)
             
             # Plot 3: Defuzzification Example (Hot Crowded Party)
-            # We re-run the compute to ensure the state is correct for the .view(sim=simulation) call
             test_case = {'temperature': 35, 'humidity': 85, 'occupancy': 9}
             logger.info(f"Visualizing Defuzzification for inputs: {test_case}")
             
