@@ -1,14 +1,6 @@
-"""
-Adaptive Smart Environment Controller - Web Dashboard.
-
-Run this file directly to start the app:
-    python FuzzySmartHome/app.py
-"""
-
 import sys
 import os
 
-# --- AUTO-LAUNCHER ---
 if __name__ == "__main__":
     if "streamlit" not in sys.modules:
         try:
@@ -20,7 +12,7 @@ if __name__ == "__main__":
         sys.argv = ["streamlit", "run", __file__]
         sys.exit(stcli.main())
 
-# --- APP LOGIC STARTS HERE ---
+# Starter code for Streamlit app
 import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
@@ -32,7 +24,7 @@ except ImportError:
     sys.path.append(os.path.dirname(__file__))
     from fuzzy_logic_engine import FuzzyACEngine
 
-# --- PAGE CONFIGURATION ---
+# PAGE CONFIGURATION 
 st.set_page_config(
     page_title="Adaptive Smart Home Controller",
     page_icon="❄️",
@@ -40,7 +32,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# --- STYLING & INTRO ---
+# STYLING & INTRO
 st.title("❄️ Adaptive Energy Management System")
 st.markdown("### `System Status: ONLINE` | `Mode: Autonomous`")
 
@@ -60,7 +52,7 @@ with st.expander("ℹ️  System Architecture & Research Abstract", expanded=Fal
 
 st.divider()
 
-# --- SIDEBAR: SENSORS (INPUTS) ---
+# SIDEBAR: SENSORS (INPUTS) 
 st.sidebar.header("🎛️ Sensor Inputs")
 st.sidebar.markdown("Simulate environmental conditions.")
 
@@ -72,7 +64,7 @@ occ = st.sidebar.slider("👥 Occupancy (People)", 0, 10, 2, 1)
 st.sidebar.markdown("---")
 st.sidebar.caption("Adaptive Controller v2.1")
 
-# --- ENGINE COMPUTATION ---
+# ENGINE COMPUTATION 
 try:
     # Initialize Engine (Cached in session state if needed, but fast enough to re-init)
     engine = FuzzyACEngine()
@@ -88,7 +80,7 @@ except Exception as e:
     st.error(f"Critical System Failure: {e}")
     st.stop()
 
-# --- DASHBOARD ROW 1: METRICS ---
+# DASHBOARD ROW 1: METRICS 
 col1, col2, col3 = st.columns(3)
 
 # 1. Power Output Metric
@@ -127,7 +119,7 @@ with col3:
 
 st.divider()
 
-# --- VISUALIZATION SECTION ---
+# VISUALIZATION SECTION 
 st.subheader("📊 Real-time Logic Analysis")
 
 st.markdown("Monitor the internal decision-making process.")
@@ -151,9 +143,6 @@ with tab1:
     
     # Plotting Consequent
     try:
-        # Create figure explicitly to avoid global state issues
-        # engine.ac_power is the Consequent object
-        # calling .view(sim=sim) populates the current figure
         fig, ax = plt.subplots(figsize=(10, 4))
         vars_['ac_power'].view(sim=sim)
         st.pyplot(fig)
