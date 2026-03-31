@@ -148,7 +148,7 @@ def create_fuzzy_system() -> Tuple[ctrl.ControlSystemSimulation, Dict[str, Any]]
     engine = FuzzyACEngine()
     return engine.get_simulation(), engine.get_variables()
 
-if __name__ == "main":
+if __name__ == "__main__":
     # Robust Self-Test
     logging.basicConfig(level=logging.INFO)
     print("[SELF-TEST] START")

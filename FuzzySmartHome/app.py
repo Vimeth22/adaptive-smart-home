@@ -1,21 +1,9 @@
 import sys
 import os
 
-if __name__ == "__main__":
-    if "streamlit" not in sys.modules:
-        try:
-            from streamlit.web import cli as stcli
-        except ImportError:
-            os.system("pip install streamlit")
-            from streamlit.web import cli as stcli
-
-        sys.argv = ["streamlit", "run", __file__]
-        sys.exit(stcli.main())
-
 # starter code for stremlit app
 import streamlit as st
 import matplotlib.pyplot as plt
-import numpy as np
 
 # Adjust path to find the engine
 try:
