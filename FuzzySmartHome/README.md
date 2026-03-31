@@ -1,102 +1,110 @@
-# Adaptive Smart Environment Controller 
+# Adaptive Smart Environment Controller
 
-## Research Abstract
+A Python-based **Autonomous Energy Management System (AEMS)** that controls AC compressor power using **Mamdani Fuzzy Logic**.
 
-This project implements an **Autonomous Energy Management System (AEMS)** designed to optimize HVAC power consumption using **Mamdani Fuzzy Inference Systems (FIS)**. Traditional threshold-based thermostats operate on a binary ON/OFF logic, leading to energy inefficiency (short-cycling) and thermal discomfort (hysteresis). 
+Instead of a simple ON/OFF thermostat, this project computes a smooth output from **0% to 100%** based on:
+- Ambient temperature
+- Relative humidity
+- Active occupancy
 
-This solution introduces a continuous control loop that modulates AC compressor power (0-100%) based on a multi-variable analysis of:
-1.  **Ambient Temperature** (°C)
-2.  **Relative Humidity** (%)
-3.  **Active Occupancy** (Person count)
+## What This Project Includes
 
-By fuzzifying these crisp inputs into linguistic variables (e.g., *Comfortable*, *Humid*, *High Load*), the system imitates human reasoning to deliver precise, energy-efficient cooling.
+- `fuzzy_logic_engine.py`: Core fuzzy inference engine (`FuzzyACEngine`)
+- `app.py`: Streamlit dashboard with real-time controls and XAI charts
+- `simulator.py`: CLI benchmark runner and visualization helper
+- `requirements.txt`: Python dependencies
 
----
+## Quick Start
 
-## Key Features 
+### 1) Clone and enter the repository
 
-*   **Logic Engine**: A robust `FuzzyACEngine` class utilizing **Centroid Defuzzification** for smooth output control.
-*   **Explainable AI (XAI)**:
-    *   **Decision Surface Visualization**: Real-time plotting of the aggregated fuzzy set to explain *why* a specific power level was chosen.
-    *   **Sensor Activation**: Visual feedback on which linguistic terms are currently active.
-*   **Web Dashboard**: A professional `Streamlit` interface for real-time scenario simulation and parameter tuning.
-*   **Modular Architecture**: Separation of concern between the Inference Engine (`fuzzy_logic_engine.py`) and the Interface (`app.py`).
+```bash
+git clone https://github.com/Vimeth22/adaptive-smart-home.git
+cd adaptive-smart-home
+```
 
----
+### 2) Create and activate a virtual environment
 
-## Installation
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
 
-Prerequisites: Python 3.9+
+### 3) Install dependencies
 
-1.  **Clone the Repository**
-    ```bash
-    git clone https://github.com/Vimeth22/adaptive-smart-home.git
-    cd adaptive-smart-home
-    ```
+```bash
+pip install -r FuzzySmartHome/requirements.txt
+```
 
-2.  **Create Virtual Environment**
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  
-    ```
+## How to Run
 
-3.  **Install Dependencies**
-    ```bash
-    pip install -r requirements.txt
-    ```
+Run all commands from the repository root (`adaptive-smart-home/`).
 
----
+### Option A: Streamlit Dashboard (Recommended)
 
-## Usage
+```bash
+python FuzzySmartHome/app.py
+```
 
-### 1. Web Dashboard (Interactive Demo)
-Launch the professional dashboard to interact with the logic engine in real-time.
+or
 
 ```bash
 streamlit run FuzzySmartHome/app.py
 ```
-*Access the dashboard at `http://localhost:8501`*
 
-### 2. CLI Benchmark Simulator
-Run a predefined set of edge-case scenarios to validate system stability.
+Then open:
+- `http://localhost:8501`
+
+### Option B: CLI Simulator
 
 ```bash
 python FuzzySmartHome/simulator.py
 ```
 
----
+This runs predefined benchmark scenarios and (on local desktop environments) shows Matplotlib visualizations.
+
+## Methodology (Mamdani FIS)
+
+1. **Fuzzification**: Convert crisp inputs into membership degrees.
+2. **Rule Evaluation**: Apply fuzzy IF-THEN rules.
+3. **Aggregation**: Combine all active rule outputs.
+4. **Defuzzification (Centroid)**: Produce a crisp AC power command.
+
+## Example Scenario
+
+Input:
+- Temperature: `35°C`
+- Humidity: `85%`
+- Occupancy: `9`
+
+Expected behavior:
+- High/maximum cooling command due to hot, humid, high-load conditions.
+
+## Troubleshooting
+
+- **Blank plots in Streamlit**: ensure the latest `app.py` is pulled and run from the repo root.
+- **No GUI plot window in simulator**: this can happen in headless environments; run on a local desktop session.
+- **Missing modules**: reinstall with:
+
+```bash
+pip install -r FuzzySmartHome/requirements.txt
+```
 
 ## Project Structure
 
-```
+```text
 adaptive-smart-home/
 ├── FuzzySmartHome/
-│   ├── app.py                  # Streamlit Web Dashboard (v2.1)
-│   ├── fuzzy_logic_engine.py   # Core Mamdani Inference Logic
-│   ├── simulator.py            # CLI Benchmarking Tool
-│   └── requirements.txt        # Python Dependencies
-├── .gitignore
-└── README.md
+│   ├── app.py
+│   ├── fuzzy_logic_engine.py
+│   ├── simulator.py
+│   ├── requirements.txt
+│   └── README.md
+├── .devcontainer/
+└── .gitignore
 ```
 
----
-
-## Methodology
-
-The system operates on a **Mamdani Inference** pipeline:
-
-1.  **Fuzzification**: 
-    - Inputs are mapped to fuzzy sets using Trapezoidal and Triangular membership functions.
-2.  **Rule Evaluation**: 
-    - 10 conditional rules (Knowledge Base) cover all operational states properly.
-    - Example: *IF Temperature is Warm AND Humidity is High THEN AC Power is High.*
-3.  **Aggregation**: 
-    - The consequences of all active rules are combined into a single fuzzy set.
-4.  **Defuzzification**: 
-    - The **Center of Gravity (Centroid)** method allows for a precise "Crisp" output value (0-100%) to be sent to the AC inverter.
-
----
-
 ## License
-This project is open-source and available under the [MIT License](LICENSE).
+
+MIT License.
 
