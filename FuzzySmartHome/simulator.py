@@ -123,5 +123,5 @@ def main():
     except Exception as e:
         logger.critical(f"Unexpected crash: {e}")
 
-if __name__ == "main":
+if __name__ == "__main__":
     main()
